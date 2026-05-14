@@ -1,53 +1,89 @@
 # Membra Mobile
 
-Membra Mobile is the owner-side proof app for the MEMBRA ecosystem.
+**Membra Mobile is the owner-side proof app namespace for MEMBRA Labs and the MEMBRA Proof Network.**
 
-It lets owners register physical ad surfaces, receive campaign offers, confirm media-kit receipt, capture proof photos, submit location-backed placement proof, scan QR/NFC tags, and track reward status.
+It turns real-world owner actions into verified proof events that can activate campaigns, create audit records, and unlock reward eligibility.
 
-## One-line thesis
+## Company Context
 
-Membra Mobile turns real-world owner actions into verified proof events that can activate campaigns and unlock reward eligibility.
+- Company: **MEMBRA Labs**
+- Flagship product: **MEMBRA Proof Network**
+- Module: **Membra Mobile**
+- Category: owner proof app, campaign offer app, QR/NFC scanner, proof-photo capture
 
-## Product role
+## One-Line Thesis
 
-- Owner onboarding
-- Surface registration
-- Vehicle, window, wearable, bag, and sign capture
-- Campaign offer review
-- Media-kit receipt confirmation
-- Proof photo submission
+Membra Mobile turns owner actions in the physical world into verified proof events.
+
+## Product Role
+
+Membra Mobile is the owner-facing app layer for:
+
+- owner onboarding
+- surface registration
+- vehicle, window, wearable, bag, and sign capture
+- campaign offer review
+- media-kit receipt confirmation
+- proof photo submission
 - QR/NFC test scans
-- Reward status display
-- Claim/dispute submission
+- reward status display
+- claim/dispute submission
+- profile and payout readiness
 
-## Core screens
+## Core Screens
 
-1. Home dashboard
-2. Register asset
-3. Campaign offers
-4. Media kit receipt
-5. Submit proof
+1. home dashboard
+2. register asset
+3. campaign offers
+4. media kit receipt
+5. submit proof
 6. QR/NFC scanner
-7. Reward status
-8. Claims and support
-9. Profile and payout readiness
+7. reward status
+8. claims and support
+9. profile and payout readiness
 
-## Integration map
+## Proof Law
 
-- `Membra_api` receives owner, asset, proof, and campaign actions.
-- `Membra_ads` defines campaign and media-kit logic.
-- `Membra_proofbook` records proof hashes.
-- `Membra_wallet` tracks reward and payout readiness.
-- `membra-qr-gateway` displays dashboard analytics.
+- no proof photo → no activation
+- no receipt confirmation → no active media kit
+- no approved proof → no reward eligibility
+- no audit record → no trusted state change
 
-## Proof law
+## Integration Map
 
-No proof photo means no activation.
+| Repo | Mobile Relationship |
+|---|---|
+| `overandor/Membra_api` | receives owner, asset, proof, and campaign actions |
+| `overandor/Membra_ads` | defines campaign, media-kit, asset, and proof logic |
+| `overandor/Membra_proofbook` | records proof hashes and audit records |
+| `overandor/Membra_wallet` | tracks reward and payout readiness |
+| `overandor/membra-qr-gateway` | displays dashboard analytics and public/private proof state |
+| `overandor/Membra_admin-` | reviews owner-submitted proof and claims |
+| `overandor/Membra_demo_data` | provides sample owner workflows for demo mode |
 
-No receipt confirmation means no active media kit.
+## Safety Rules
 
-No approved proof means no reward eligibility.
+- no sensitive identity documents in public proof views
+- no private location exposure without consent and access controls
+- no reward display that implies guaranteed payout before review
+- no upload flow without evidence retention policy
+- no proof deletion without audit policy
 
-## Current stage
+## Productization Priority
 
-Owner mobile workflow scaffold. Next step is a lightweight Expo/React Native app shell using the API flows documented in this repo.
+This repo should become an Expo or React Native owner app after the backend and dashboard demo are stabilized.
+
+Recommended build order:
+
+1. static Expo shell
+2. register asset screen
+3. campaign offer screen
+4. media-kit receipt screen
+5. proof photo capture screen
+6. QR/NFC scanner screen
+7. reward status screen
+8. API integration with `Membra_ads` or `Membra_api`
+
+## Current Stage
+
+Owner mobile workflow scaffold and product charter. Not yet a production mobile application.
