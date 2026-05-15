@@ -84,6 +84,130 @@ Recommended build order:
 7. reward status screen
 8. API integration with `Membra_ads` or `Membra_api`
 
+## Tech Stack
+
+- **Framework**: Expo SDK 51 with React Native 0.74
+- **Navigation**: Expo Router (file-based routing)
+- **State Management**: Zustand with secure storage persistence
+- **Language**: TypeScript
+- **Styling**: React Native StyleSheet with dark/light theme support
+- **Camera**: expo-camera / expo-image-picker
+- **Scanner**: expo-barcode-scanner (QR/NFC placeholders)
+- **Location**: expo-location
+- **Auth**: JWT via expo-secure-store
+
+## Project Structure
+
+```
+app/
+  (tabs)/           # Main app tabs (home, assets, campaigns, proof, profile)
+  (auth)/           # Auth screens (login)
+  _layout.tsx       # Root layout with auth context
+components/
+  Button.tsx
+  Card.tsx
+  ScreenHeader.tsx
+  TabIcon.tsx
+constants/
+  Colors.ts         # Theme colors
+  Api.ts            # API endpoint definitions
+hooks/
+  useAuth.ts
+  useTheme.ts
+services/
+  apiClient.ts      # HTTP client for Membra API
+stores/
+  authStore.ts      # Authentication state (Zustand + secure-store)
+  appStore.ts       # App data state (assets, campaigns, proofs, etc.)
+types/
+  index.ts          # TypeScript interfaces
+```
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+ and npm
+- Expo CLI (`npm install -g expo-cli`)
+- iOS Simulator (macOS) or Android Studio Emulator
+
+### Installation
+
+```bash
+git clone https://github.com/overandor/membra_mobile.git
+cd membra_mobile
+npm install
+```
+
+### Environment Setup
+
+```bash
+cp .env.example .env
+# Edit .env with your API URL:
+# EXPO_PUBLIC_MEMBRA_API_URL=https://api.membra.labs/v1
+```
+
+### Running Locally
+
+```bash
+# Start the development server
+npx expo start
+
+# Press 'i' for iOS simulator
+# Press 'a' for Android emulator
+# Press 'w' for web
+```
+
+### Building for Production
+
+```bash
+# iOS build
+npx expo run:ios --configuration Release
+
+# Android build
+npx expo run:android --variant release
+
+# EAS Build (managed workflow)
+npx eas build --platform all
+```
+
+## API Integration
+
+The app is configured to connect to `Membra_api` and related services. Set `EXPO_PUBLIC_MEMBRA_API_URL` in your `.env` to point to your deployed backend.
+
+| Endpoint | Purpose |
+|---|---|
+| `GET /v1/campaigns/available` | Fetch campaign offers |
+| `POST /v1/campaigns/{id}/accept` | Accept a campaign |
+| `POST /v1/ad-assets` | Register a new asset |
+| `POST /v1/proof/photo` | Submit proof photo |
+| `POST /v1/proof/qr-scan` | Record QR scan |
+| `GET /v1/wallet/reward-status` | Check earnings |
+| `POST /v1/claims` | Submit support claim |
+
 ## Current Stage
 
-Owner mobile workflow scaffold and product charter. Not yet a production mobile application.
+**Beta / Active Development**
+
+- Expo shell with 5 tab screens implemented
+- Asset registration with 6 asset types
+- Campaign offers with accept/decline flow
+- Proof submission (photo, QR, NFC placeholders)
+- Profile with wallet readiness and claims
+- Demo mode available without backend
+- API client ready for `Membra_api` integration
+
+## Remaining Work
+
+- [ ] Integrate expo-camera for live photo capture
+- [ ] Integrate expo-barcode-scanner for QR scanning
+- [ ] Add react-native-maps for asset location pinning
+- [ ] Connect to live `Membra_api` endpoints
+- [ ] Add push notifications for proof approvals
+- [ ] Media kit receipt confirmation flow
+- [ ] Deep linking for campaign invites
+- [ ] Biometric auth (Face ID / Touch ID)
+
+## License
+
+MIT — See [LICENSE](LICENSE) for details.
